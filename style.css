@@ -1,0 +1,152 @@
+﻿body {
+    margin: 0;
+    padding: 0;
+    height: 500vh;
+    overflow-x: hidden;
+    background: #000;
+}
+
+
+.container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    z-index: 1;
+}
+
+
+.background {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: url('https://images.unsplash.com/photo-1501854140801-50d01698950b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+    background-size: cover;
+    background-position: center;
+    will-change: transform;
+}
+
+
+svg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+
+.blade {
+    transform-origin: center;
+    will-change: transform, opacity;
+    transition: transform 0.1s ease-out, opacity 0.3s ease-out;
+}
+
+
+.header {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    height: 60px;
+    background: #000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    z-index: 20;
+    color: white;
+    font-family: Arial, sans-serif;
+}
+
+
+.header-title {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+
+.book-now-btn {
+    background: #fff;
+    color: #000;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s;
+    margin-right: 20px;
+}
+
+
+.book-now-btn:hover {
+    background: #ddd;
+}
+
+
+.content {
+    position: relative;
+    z-index: 10;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    height: 500vh;
+    background: transparent;
+    margin-top: 60px;
+}
+
+
+.scroll-content {
+    position: absolute;
+    top: 100vh;
+    width: 100%;
+    height: 100vh;
+}
+
+
+.photo {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    will-change: transform;
+    box-shadow: 0 4px 8px rgba(0, 0, 1, 1);
+}
+
+
+.photo1 { top: 0; }
+.photo2 { top: 60vh; }
+.photo3 { top: 120vh; }
+.photo4 { top: 180vh; }
+.photo5 { top: 240vh; }
+
+
+.footer {
+    position: sticky;
+    bottom: 0;
+    width: 100%;
+    height: 60px;
+    background: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px; /* Space between links */
+    z-index: 20;
+    color: white;
+    font-family: Arial, sans-serif;
+}
+
+
+.footer-link {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    padding: 10px 20px;
+    transition: color 0.3s;
+}
+
+
+.footer-link:hover {
+    color: #ddd;
+}

@@ -1,0 +1,49 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fullscreen Aperture Effect</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="header">
+        <div class="header-title">CHERYL NAUMAN - Photographer</div>
+        <button class="book-now-btn">Book Now</button>
+    </div>
+    <div class="container">
+        <div class="background"></div>
+        <svg viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet">
+            <defs>
+                <linearGradient id="bladeGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" style="stop-color: #000000; stop-opacity: 1" />
+                    <stop offset="100%" style="stop-color: #404040; stop-opacity: 1" />
+                </linearGradient>
+            </defs>
+            <polygon class="blade" points="50,50 200,-100 200,200" fill="url(#bladeGradient)" transform="rotate(0 50 50)" />
+            <polygon class="blade" points="50,50 200,-100 200,200" fill="url(#bladeGradient)" transform="rotate(60 50 50)" />
+            <polygon class="blade" points="50,50 200,-100 200,200" fill="url(#bladeGradient)" transform="rotate(120 50 50)" />
+            <polygon class="blade" points="50,50 200,-100 200,200" fill="url(#bladeGradient)" transform="rotate(180 50 50)" />
+            <polygon class="blade" points="50,50 200,-100 200,200" fill="url(#bladeGradient)" transform="rotate(240 50 50)" />
+            <polygon class="blade" points="50,50 200,-100 200,200" fill="url(#bladeGradient)" transform="rotate(300 50 50)" />
+        </svg>
+    </div>
+    <div class="content">
+        <h1>Scroll to Open</h1>
+        <div class="scroll-content">
+            <div class="photo photo1" style="background-image: url('https://images.pexels.com/photos/247599/pexels-photo-247599.jpeg');"></div>
+            <div class="photo photo2" style="background-image: url('https://images.pexels.com/photos/709552/pexels-photo-709552.jpeg');"></div>
+            <div class="photo photo3" style="background-image: url('https://images.pexels.com/photos/206359/pexels-photo-206359.jpeg');"></div>
+            <div class="photo photo4" style="background-image: url('https://images.pexels.com/photos/1955134/pexels-photo-1955134.jpeg');"></div>
+            <div class="photo photo5" style="background-image: url('https://images.pexels.com/photos/691668/pexels-photo-691668.jpeg');"></div>
+        </div>
+    </div>
+    <div class="footer">
+        <a href="Events.html" class="footer-link">Events</a>
+        <a href="Portraits.html" class="footer-link">Portraits</a>
+        <a href="Food.html" class="footer-link">Food</a>
+        <a href="Lifestyle.html" class="footer-link">Lifestyle</a>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
