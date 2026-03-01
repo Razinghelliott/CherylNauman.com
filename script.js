@@ -75,31 +75,24 @@ function buildIris(openAmount) {
             transform="${bladeTransform}"
         />`;
 
-        // "Scroll to Open" engraved along the leading edge of blade 4
-        if (i === 4) {
-            // Position text along the start edge of the blade
-            // Offset slightly inward from the edge so it sits on the blade surface
+        // "Scroll to Open" engraved along the leading edge of blade 3 (diagonal blade)
+        if (i === 3) {
+            // Place text along the start edge of the blade at a slant
             const edgeAngle = startAngle;
-            const offsetAngle = edgeAngle + 3; // nudge a few degrees inward from edge
-            const textStart = maxRadius * 0.18; // start distance from center
-            const textEnd = maxRadius * 0.52;   // end distance from center
-            const textMid = (textStart + textEnd) / 2;
-            const textPos = ptAt(offsetAngle, textMid);
-
-            // Text rotation follows the blade edge angle exactly
-            const textRotDeg = edgeAngle;
+            const offsetAngle = edgeAngle + 5; // nudge inward from edge
+            const textPos = ptAt(offsetAngle, maxRadius * 0.28);
 
             html += `<text
                 x="${textPos.x}" y="${textPos.y}"
                 transform="${bladeTransform}"
                 text-anchor="middle"
                 dominant-baseline="middle"
-                fill="rgba(255,255,255,0.45)"
+                fill="rgba(255,255,255,0.5)"
                 font-family="'Georgia', 'Times New Roman', serif"
-                font-size="${Math.max(13, vw * 0.013)}px"
+                font-size="${Math.max(14, vw * 0.015)}px"
                 font-weight="400"
                 letter-spacing="5"
-            ><tspan transform="rotate(${textRotDeg} ${textPos.x} ${textPos.y})">SCROLL TO OPEN</tspan></text>`;
+            ><tspan transform="rotate(${edgeAngle} ${textPos.x} ${textPos.y})">SCROLL TO OPEN</tspan></text>`;
         }
     }
 
