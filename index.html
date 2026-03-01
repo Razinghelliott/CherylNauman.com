@@ -4,13 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cheryl Nauman - Photographer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@200;300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
+    <!-- ═══════ HEADER ═══════ -->
     <div class="header">
-        <div class="header-title">CHERYL NAUMAN - Photographer</div>
-        <button class="book-now-btn">Book Now</button>
+        <div class="header-title">CHERYL NAUMAN</div>
+        <nav class="header-nav">
+            <a href="#work" class="nav-link">Work</a>
+            <a href="#about" class="nav-link">About</a>
+            <a href="#contact" class="nav-link">Contact</a>
+            <button class="book-now-btn">Book a Session</button>
+        </nav>
     </div>
+
+    <!-- ═══════ APERTURE CONTAINER ═══════ -->
     <div class="container">
         <div class="background"></div>
         <div class="aperture-overlay">
@@ -41,23 +53,143 @@
                 <g id="bladeGroup"></g>
             </svg>
         </div>
-    </div>
-    <div class="content">
-        <h1></h1>
-        <div class="scroll-content">
-            <div class="photo photo1" style="background-image: url('https://images.pexels.com/photos/247599/pexels-photo-247599.jpeg');"></div>
-            <div class="photo photo2" style="background-image: url('https://images.pexels.com/photos/709552/pexels-photo-709552.jpeg');"></div>
-            <div class="photo photo3" style="background-image: url('https://images.pexels.com/photos/206359/pexels-photo-206359.jpeg');"></div>
-            <div class="photo photo4" style="background-image: url('https://images.pexels.com/photos/1955134/pexels-photo-1955134.jpeg');"></div>
-            <div class="photo photo5" style="background-image: url('https://images.pexels.com/photos/691668/pexels-photo-691668.jpeg');"></div>
+        <!-- Tagline that fades in as aperture opens -->
+        <div class="hero-tagline">
+            <span class="tagline-top">Every Moment</span>
+            <span class="tagline-bottom">Deserves a Witness</span>
         </div>
     </div>
-    <div class="footer">
-        <a href="Events.html" class="footer-link">Events</a>
-        <a href="Portraits.html" class="footer-link">Portraits</a>
-        <a href="Food.html" class="footer-link">Food</a>
-        <a href="Lifestyle.html" class="footer-link">Lifestyle</a>
-    </div>
+
+    <!-- ═══════ MAIN CONTENT ═══════ -->
+    <main class="content">
+
+        <!-- SECTION 1: Statement -->
+        <section class="section section-statement">
+            <div class="reveal-up">
+                <p class="statement-text">
+                    I don't just take photographs.<br>
+                    <em>I collect the seconds that matter.</em>
+                </p>
+            </div>
+        </section>
+
+        <!-- SECTION 2: Featured Work - Cinematic Grid -->
+        <section id="work" class="section section-work">
+            <div class="section-label reveal-up">
+                <span class="label-line"></span>
+                <span class="label-text">Selected Work</span>
+                <span class="label-line"></span>
+            </div>
+
+            <!-- Row 1: Full bleed hero image -->
+            <div class="work-hero reveal-scale">
+                <div class="work-image" style="background-image: url('https://images.pexels.com/photos/247599/pexels-photo-247599.jpeg');">
+                    <div class="work-overlay">
+                        <span class="work-category">Events</span>
+                        <h3 class="work-title">Where Joy Lives</h3>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Row 2: Asymmetric duo -->
+            <div class="work-duo">
+                <div class="work-duo-large reveal-left">
+                    <div class="work-image" style="background-image: url('https://images.pexels.com/photos/709552/pexels-photo-709552.jpeg');">
+                        <div class="work-overlay">
+                            <span class="work-category">Portraits</span>
+                            <h3 class="work-title">The Real You</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="work-duo-small reveal-right">
+                    <div class="work-image" style="background-image: url('https://images.pexels.com/photos/206359/pexels-photo-206359.jpeg');">
+                        <div class="work-overlay">
+                            <span class="work-category">Lifestyle</span>
+                            <h3 class="work-title">Unscripted</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Row 3: Reverse asymmetric -->
+            <div class="work-duo work-duo-reverse">
+                <div class="work-duo-small reveal-left">
+                    <div class="work-image" style="background-image: url('https://images.pexels.com/photos/1955134/pexels-photo-1955134.jpeg');">
+                        <div class="work-overlay">
+                            <span class="work-category">Food</span>
+                            <h3 class="work-title">A Feast for the Eyes</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="work-duo-large reveal-right">
+                    <div class="work-image" style="background-image: url('https://images.pexels.com/photos/691668/pexels-photo-691668.jpeg');">
+                        <div class="work-overlay">
+                            <span class="work-category">Events</span>
+                            <h3 class="work-title">The Night Was Young</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3: Pull Quote -->
+        <section class="section section-quote">
+            <div class="quote-container reveal-up">
+                <div class="quote-mark">&ldquo;</div>
+                <blockquote class="quote-text">
+                    Photography is the story I fail to put into words.
+                </blockquote>
+                <cite class="quote-author">&mdash; Destin Sparks</cite>
+            </div>
+        </section>
+
+        <!-- SECTION 4: About Teaser -->
+        <section id="about" class="section section-about">
+            <div class="about-layout">
+                <div class="about-image reveal-left">
+                    <div class="about-photo" style="background-image: url('https://images.pexels.com/photos/3760514/pexels-photo-3760514.jpeg');"></div>
+                </div>
+                <div class="about-text reveal-right">
+                    <span class="label-text">About Cheryl</span>
+                    <h2 class="about-heading">An eye for light.<br>A heart for people.</h2>
+                    <p class="about-body">
+                        With over a decade behind the lens, I've learned that the best photographs happen in the spaces between poses &mdash; the stolen glance, the unguarded laugh, the quiet exhale before "I do."
+                    </p>
+                    <p class="about-body">
+                        Based in Southern California, available worldwide.
+                    </p>
+                    <a href="#contact" class="about-link">Let's create something beautiful &rarr;</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 5: Contact / CTA -->
+        <section id="contact" class="section section-cta">
+            <div class="cta-content reveal-scale">
+                <span class="cta-eyebrow">Ready?</span>
+                <h2 class="cta-heading">Let's Make<br>Something Timeless</h2>
+                <a href="mailto:cheryl@cherylnauman.com" class="cta-button">Get in Touch</a>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ═══════ FOOTER ═══════ -->
+    <footer class="footer">
+        <div class="footer-top">
+            <div class="footer-brand">CHERYL NAUMAN</div>
+            <div class="footer-links">
+                <a href="Events.html" class="footer-link">Events</a>
+                <a href="Portraits.html" class="footer-link">Portraits</a>
+                <a href="Food.html" class="footer-link">Food</a>
+                <a href="Lifestyle.html" class="footer-link">Lifestyle</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span class="footer-copy">&copy; 2026 Cheryl Nauman Photography</span>
+        </div>
+    </footer>
+
     <script src="script.js"></script>
 </body>
 </html>
