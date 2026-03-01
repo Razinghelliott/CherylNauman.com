@@ -40,7 +40,6 @@ svg {
 
 .blade {
     will-change: transform, opacity;
-    transition: opacity 0.15s ease-out;
 }
 
 

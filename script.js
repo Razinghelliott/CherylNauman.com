@@ -4,34 +4,25 @@ const container = document.querySelector('.container');
 const photos = document.querySelectorAll('.photo');
 const maxScroll = window.innerHeight;
 
+// Cache base angles so we don't read the DOM every frame
+const baseAngles = Array.from(blades).map(b => parseFloat(b.getAttribute('data-angle')));
 
-window.addEventListener('scroll', () => {
+let ticking = false;
+
+function updateScene() {
     const scrollPosition = window.scrollY;
     const progress = Math.min(scrollPosition / maxScroll, 1);
 
     // --- Aperture iris effect ---
-    // Each blade rotates around the center to create widening gaps (like a real iris).
-    // progress 0 = closed (blades overlapping, fully covering viewport)
-    // progress 1 = open (blades rotated apart, faded out)
-    const openAngle = progress * 25;  // each blade rotates up to 25deg to open
-
-    // Opacity: hold fully visible until 40% scroll, then fade to 0
+    const openAngle = progress * 25;
     const opacity = progress < 0.4 ? 1 : Math.max(0, 1 - ((progress - 0.4) / 0.6));
+    const finalOpacity = progress >= 0.95 ? 0 : opacity;
 
-    blades.forEach((blade) => {
-        const baseAngle = parseFloat(blade.getAttribute('data-angle'));
-        const rotation = baseAngle + openAngle;
-        blade.setAttribute('transform', `rotate(${rotation} 50 50)`);
-        blade.style.opacity = opacity;
-    });
-
-    // Ensure fully hidden once scroll completes
-    if (progress >= 0.95) {
-        blades.forEach((blade) => {
-            blade.style.opacity = 0;
-        });
+    for (let i = 0; i < blades.length; i++) {
+        const rotation = baseAngles[i] + openAngle;
+        blades[i].setAttribute('transform', `rotate(${rotation} 50 50)`);
+        blades[i].setAttribute('opacity', finalOpacity);
     }
-
 
     // --- Main background parallax ---
     const bgTranslate = scrollPosition * 0.3;
@@ -45,15 +36,23 @@ window.addEventListener('scroll', () => {
         background.style.transform = `translateY(-${maxScroll * 0.3}px) scale(1.1)`;
     }
 
-
     // --- Parallax for gallery photos ---
-    photos.forEach((photo, index) => {
-        const speed = 0.2 + (index * 0.1);
-        const photoTranslate = (scrollPosition - maxScroll) * speed;
+    for (let i = 0; i < photos.length; i++) {
+        const speed = 0.2 + (i * 0.1);
         if (scrollPosition > maxScroll) {
-            photo.style.transform = `translateY(-${photoTranslate}px)`;
+            const photoTranslate = (scrollPosition - maxScroll) * speed;
+            photos[i].style.transform = `translateY(-${photoTranslate}px)`;
         } else {
-            photo.style.transform = 'translateY(0)';
+            photos[i].style.transform = 'translateY(0)';
         }
-    });
-});
+    }
+
+    ticking = false;
+}
+
+window.addEventListener('scroll', () => {
+    if (!ticking) {
+        requestAnimationFrame(updateScene);
+        ticking = true;
+    }
+}, { passive: true });
