@@ -10,25 +10,23 @@ window.addEventListener('scroll', () => {
     const progress = Math.min(scrollPosition / maxScroll, 1);
 
     // --- Aperture iris effect ---
-    // Blades rotate open and pull outward from center as you scroll.
-    // progress 0 = fully closed, progress 1 = fully open.
-    const openAngle = progress * 30;          // each blade rotates up to 30deg open
-    const pullBack = progress * 40;           // blades translate away from center
-    // Opacity: fully visible until 50% scroll, then fade out over remaining 50%
-    const opacity = progress < 0.5 ? 1 : Math.max(0, 1 - ((progress - 0.5) / 0.5));
+    // Each blade rotates around the center to create widening gaps (like a real iris).
+    // progress 0 = closed (blades overlapping, fully covering viewport)
+    // progress 1 = open (blades rotated apart, faded out)
+    const openAngle = progress * 25;  // each blade rotates up to 25deg to open
+
+    // Opacity: hold fully visible until 40% scroll, then fade to 0
+    const opacity = progress < 0.4 ? 1 : Math.max(0, 1 - ((progress - 0.4) / 0.6));
 
     blades.forEach((blade) => {
         const baseAngle = parseFloat(blade.getAttribute('data-angle'));
         const rotation = baseAngle + openAngle;
-        // Use SVG transform (operates in viewBox coordinate space)
-        blade.setAttribute('transform',
-            `rotate(${rotation} 50 50) translate(0 -${pullBack})`
-        );
+        blade.setAttribute('transform', `rotate(${rotation} 50 50)`);
         blade.style.opacity = opacity;
     });
 
-    // If we've scrolled past the aperture zone, ensure blades are fully hidden
-    if (progress >= 0.98) {
+    // Ensure fully hidden once scroll completes
+    if (progress >= 0.95) {
         blades.forEach((blade) => {
             blade.style.opacity = 0;
         });
