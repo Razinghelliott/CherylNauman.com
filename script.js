@@ -1,4 +1,4 @@
-﻿const blades = document.querySelectorAll('.blade');
+const blades = document.querySelectorAll('.blade');
 const background = document.querySelector('.background');
 const container = document.querySelector('.container');
 const photos = document.querySelectorAll('.photo');
@@ -8,34 +8,34 @@ const maxScroll = window.innerHeight;
 window.addEventListener('scroll', () => {
     const scrollPosition = window.scrollY;
     const progress = Math.min(scrollPosition / maxScroll, 1);
-    
-    // Aperture effect
-    const scaleFactor = 1 - (progress * 0.6);
-    const translateFactor = progress * 300;
-    const opacity = progress < 0.6 ? 1 : (1 - ((progress - 0.6) / 0.4));
-    
-    blades.forEach((blade, index) => {
-        const baseRotation = index * 60;
-        blade.style.transform = `
-            rotate(${baseRotation}deg)
-            scale(${scaleFactor})
-            translateY(-${translateFactor}px)
-        `;
+
+    // --- Aperture iris effect ---
+    // Blades rotate open and pull outward from center as you scroll.
+    // progress 0 = fully closed, progress 1 = fully open.
+    const openAngle = progress * 30;          // each blade rotates up to 30deg open
+    const pullBack = progress * 40;           // blades translate away from center
+    // Opacity: fully visible until 50% scroll, then fade out over remaining 50%
+    const opacity = progress < 0.5 ? 1 : Math.max(0, 1 - ((progress - 0.5) / 0.5));
+
+    blades.forEach((blade) => {
+        const baseAngle = parseFloat(blade.getAttribute('data-angle'));
+        const rotation = baseAngle + openAngle;
+        // Use SVG transform (operates in viewBox coordinate space)
+        blade.setAttribute('transform',
+            `rotate(${rotation} 50 50) translate(0 -${pullBack})`
+        );
         blade.style.opacity = opacity;
-
-
-        if (progress === 1) {
-            blade.style.transform = `
-                rotate(${baseRotation}deg)
-                scale(0.1)
-                translateY(-300px)
-            `;
-            blade.style.opacity = '0';
-        }
     });
 
+    // If we've scrolled past the aperture zone, ensure blades are fully hidden
+    if (progress >= 0.98) {
+        blades.forEach((blade) => {
+            blade.style.opacity = 0;
+        });
+    }
 
-    // Main background parallax
+
+    // --- Main background parallax ---
     const bgTranslate = scrollPosition * 0.3;
     if (scrollPosition <= maxScroll) {
         background.style.transform = `translateY(-${bgTranslate}px) scale(1.1)`;
@@ -48,25 +48,14 @@ window.addEventListener('scroll', () => {
     }
 
 
-    if (scrollPosition < maxScroll) {
-        blades.forEach(blade => {
-            blade.style.opacity = `${opacity}`;
-        });
-    } else {
-        blades.forEach(blade => {
-            blade.style.opacity = '0';
-        });
-    }
-
-
-    // Parallax for additional photos
+    // --- Parallax for gallery photos ---
     photos.forEach((photo, index) => {
-        const speed = 0.2 + (index * 0.1); // Different speeds: 0.2, 0.3, 0.4, 0.5, 0.6
+        const speed = 0.2 + (index * 0.1);
         const photoTranslate = (scrollPosition - maxScroll) * speed;
         if (scrollPosition > maxScroll) {
             photo.style.transform = `translateY(-${photoTranslate}px)`;
         } else {
-            photo.style.transform = `translateY(0)`;
+            photo.style.transform = 'translateY(0)';
         }
     });
 });
