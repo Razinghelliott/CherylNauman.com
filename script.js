@@ -90,7 +90,7 @@ function buildIris(openAmount) {
 
             html += `<text
                 x="${tmx}" y="${tmy}"
-                transform="${bladeTransform}"
+                transform="${bladeTransform} rotate(${lineAngleDeg} ${tmx} ${tmy})"
                 text-anchor="middle"
                 dominant-baseline="middle"
                 fill="rgba(255,255,255,0.5)"
@@ -98,8 +98,7 @@ function buildIris(openAmount) {
                 font-size="${Math.max(14, vw * 0.015)}px"
                 font-weight="400"
                 letter-spacing="5"
-                rotate="${lineAngleDeg}"
-            ><tspan transform="rotate(${lineAngleDeg} ${tmx} ${tmy})">SCROLL TO OPEN</tspan></text>`;
+            >SCROLL TO OPEN</text>`;
         }
     }
 
