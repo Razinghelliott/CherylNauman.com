@@ -149,18 +149,20 @@ function updateScene() {
         overlay.style.opacity = 1;
     }
 
-    // Tagline reveal — fades in as aperture opens, hides when content scrolls over
+    // Tagline reveal — fades in as aperture opens, stays through hero viewing
     if (heroTagline) {
-        if (progress > 0.15 && progress < 0.98) {
+        const taglineShow = maxScroll * 0.15;
+        const taglineHide = maxScroll * 1.85;
+        if (scrollY > taglineShow && scrollY < taglineHide) {
             heroTagline.classList.add('visible');
         } else {
             heroTagline.classList.remove('visible');
         }
     }
 
-    // Background parallax — subtle zoom + drift as aperture opens
-    const bgParallax = Math.min(scrollY, maxScroll) * 0.15;
-    const bgScale = 1.1 + (progress * 0.05);
+    // Background parallax — subtle zoom + drift through full hero viewing
+    const bgParallax = scrollY * 0.08;
+    const bgScale = 1.1 + (Math.min(progress, 1) * 0.05);
     background.style.transform = `translateY(-${bgParallax}px) scale(${bgScale})`;
 
     // Check scroll reveals

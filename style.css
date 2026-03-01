@@ -199,7 +199,7 @@ body {
     position: relative;
     z-index: 10;
     background: var(--near-black);
-    margin-top: 100vh;
+    margin-top: 200vh; /* extra viewport of scroll to appreciate the hero before content covers it */
     padding-top: 0;
 }
 
