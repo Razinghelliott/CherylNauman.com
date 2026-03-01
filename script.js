@@ -158,16 +158,10 @@ function updateScene() {
         }
     }
 
-    // Background parallax
-    const bgParallax = Math.min(scrollY, maxScroll) * 0.3;
-    background.style.transform = `translateY(-${bgParallax}px) scale(1.1)`;
-
-    // Slide container up after aperture zone so content scrolls over it
-    if (scrollY > maxScroll) {
-        container.style.transform = `translateY(-${scrollY - maxScroll}px)`;
-    } else {
-        container.style.transform = 'translateY(0)';
-    }
+    // Background parallax — subtle zoom + drift as aperture opens
+    const bgParallax = Math.min(scrollY, maxScroll) * 0.15;
+    const bgScale = 1.1 + (progress * 0.05);
+    background.style.transform = `translateY(-${bgParallax}px) scale(${bgScale})`;
 
     // Check scroll reveals
     checkReveals();
