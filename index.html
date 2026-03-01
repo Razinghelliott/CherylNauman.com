@@ -53,7 +53,6 @@
                 <g id="bladeGroup"></g>
             </svg>
         </div>
-        <!-- Tagline that fades in as aperture opens -->
         <div class="hero-tagline">
             <span class="tagline-top">Every Moment</span>
             <span class="tagline-bottom">Deserves a Witness</span>
@@ -63,7 +62,7 @@
     <!-- ═══════ MAIN CONTENT ═══════ -->
     <main class="content">
 
-        <!-- SECTION 1: Statement -->
+        <!-- STATEMENT -->
         <section class="section section-statement">
             <div class="reveal-up">
                 <p class="statement-text">
@@ -73,7 +72,7 @@
             </div>
         </section>
 
-        <!-- SECTION 2: Featured Work - Cinematic Grid -->
+        <!-- SELECTED WORK — CINEMATIC GALLERY -->
         <section id="work" class="section section-work">
             <div class="section-label reveal-up">
                 <span class="label-line"></span>
@@ -81,73 +80,274 @@
                 <span class="label-line"></span>
             </div>
 
-            <!-- Row 1: Full bleed hero image -->
-            <div class="work-hero reveal-scale">
-                <div class="work-image" style="background-image: url('images/portrait-waves.jpg');">
-                    <div class="work-overlay">
-                        <span class="work-category">Portraits</span>
-                        <h3 class="work-title">Golden Hour</h3>
+            <!-- Row 1: Cinematic wide — Couple on beach -->
+            <div class="gallery-row reveal-scale">
+                <div class="gallery-item gallery-full">
+                    <div class="work-image" style="background-image: url('images/couple-beach-dance.jpg');">
+                        <div class="work-overlay">
+                            <span class="work-category">Couples</span>
+                            <h3 class="work-title">Hold On Tight</h3>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Row 2: Asymmetric duo -->
-            <div class="work-duo">
-                <div class="work-duo-large reveal-left">
-                    <div class="work-image" style="background-image: url('images/portrait-sand.jpg');">
+            <!-- Row 2: Golden ratio duo — Grad portrait + Dancers -->
+            <div class="gallery-row gallery-duo">
+                <div class="gallery-item gallery-tall reveal-left">
+                    <div class="work-image" style="background-image: url('images/golden-grad.jpg');">
                         <div class="work-overlay">
                             <span class="work-category">Portraits</span>
-                            <h3 class="work-title">The Real You</h3>
+                            <h3 class="work-title">New Horizons</h3>
                         </div>
                     </div>
                 </div>
-                <div class="work-duo-small reveal-right">
-                    <div class="work-image" style="background-image: url('images/lifestyle-bts.jpg');">
+                <div class="gallery-item gallery-wide reveal-right">
+                    <div class="work-image" style="background-image: url('images/street-dancers.jpg');">
+                        <div class="work-overlay">
+                            <span class="work-category">Dance</span>
+                            <h3 class="work-title">Airborne</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Row 3: Trio — DotD, Lilies, Beach portrait -->
+            <div class="gallery-row gallery-trio">
+                <div class="gallery-item reveal-left">
+                    <div class="work-image" style="background-image: url('images/portrait-dotd.jpg');">
+                        <div class="work-overlay">
+                            <span class="work-category">Culture</span>
+                            <h3 class="work-title">Día de los Muertos</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="gallery-item reveal-up">
+                    <div class="work-image" style="background-image: url('images/landscape-lilly.jpg');">
+                        <div class="work-overlay">
+                            <span class="work-category">Nature</span>
+                            <h3 class="work-title">Still Water</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="gallery-item reveal-right">
+                    <div class="work-image" style="background-image: url('images/beach-bikini.jpg');">
+                        <div class="work-overlay">
+                            <span class="work-category">Portraits</span>
+                            <h3 class="work-title">Soft Light</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Row 4: Reverse duo — Proposal + Geisha -->
+            <div class="gallery-row gallery-duo gallery-duo-reverse">
+                <div class="gallery-item gallery-wide reveal-left">
+                    <div class="work-image" style="background-image: url('images/proposal-beach.jpg');">
+                        <div class="work-overlay">
+                            <span class="work-category">Couples</span>
+                            <h3 class="work-title">She Said Yes</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="gallery-item gallery-tall reveal-right">
+                    <div class="work-image" style="background-image: url('images/geisha.jpg');">
+                        <div class="work-overlay">
+                            <span class="work-category">Portraits</span>
+                            <h3 class="work-title">Elegance</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Row 5: Full bleed — Pole dancer -->
+            <div class="gallery-row reveal-scale">
+                <div class="gallery-item gallery-full">
+                    <div class="work-image" style="background-image: url('images/pole-dancer.jpg');">
+                        <div class="work-overlay">
+                            <span class="work-category">Dance</span>
+                            <h3 class="work-title">Gravity Optional</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Row 6: Trio — Lifeguard, NOLA, Grad Pool -->
+            <div class="gallery-row gallery-trio">
+                <div class="gallery-item reveal-left">
+                    <div class="work-image" style="background-image: url('images/lifeguard-tower.jpg');">
                         <div class="work-overlay">
                             <span class="work-category">Lifestyle</span>
-                            <h3 class="work-title">Unscripted</h3>
+                            <h3 class="work-title">Tower 3</h3>
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <!-- Row 3: Reverse asymmetric -->
-            <div class="work-duo work-duo-reverse">
-                <div class="work-duo-small reveal-left">
-                    <div class="work-image" style="background-image: url('images/events-party.jpg');">
+                <div class="gallery-item reveal-up">
+                    <div class="work-image" style="background-image: url('images/bean-parade-nola.JPG');">
                         <div class="work-overlay">
-                            <span class="work-category">Events</span>
-                            <h3 class="work-title">The Night Was Young</h3>
+                            <span class="work-category">Culture</span>
+                            <h3 class="work-title">Mardi Gras</h3>
                         </div>
                     </div>
                 </div>
-                <div class="work-duo-large reveal-right">
-                    <div class="work-image" style="background-image: url('images/portrait-golden.jpg');">
+                <div class="gallery-item reveal-right">
+                    <div class="work-image" style="background-image: url('images/grad-pool.jpg');">
                         <div class="work-overlay">
                             <span class="work-category">Portraits</span>
-                            <h3 class="work-title">Sunset Glow</h3>
+                            <h3 class="work-title">Reflections</h3>
                         </div>
                     </div>
                 </div>
             </div>
+
+            <!-- Row 7: Duo — Couple + Cave -->
+            <div class="gallery-row gallery-duo">
+                <div class="gallery-item gallery-tall reveal-left">
+                    <div class="work-image" style="background-image: url('images/couple-great.jpg');">
+                        <div class="work-overlay">
+                            <span class="work-category">Couples</span>
+                            <h3 class="work-title">Golden Years</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="gallery-item gallery-wide reveal-right">
+                    <div class="work-image" style="background-image: url('images/the-hole.JPG');">
+                        <div class="work-overlay">
+                            <span class="work-category">Landscape</span>
+                            <h3 class="work-title">The Opening</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Row 8: Duo — B&W + Beach chair -->
+            <div class="gallery-row gallery-duo gallery-duo-reverse">
+                <div class="gallery-item gallery-wide reveal-left">
+                    <div class="work-image" style="background-image: url('images/brook-pet.JPG');">
+                        <div class="work-overlay">
+                            <span class="work-category">Portraits</span>
+                            <h3 class="work-title">Wild Things</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="gallery-item gallery-tall reveal-right">
+                    <div class="work-image" style="background-image: url('images/life-is-a-beach-chair.jpg');">
+                        <div class="work-overlay">
+                            <span class="work-category">Landscape</span>
+                            <h3 class="work-title">End of Day</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Row 9: Trio — Cage, Height, Grad walking -->
+            <div class="gallery-row gallery-trio">
+                <div class="gallery-item reveal-left">
+                    <div class="work-image" style="background-image: url('images/cage-dancers.jpg');">
+                        <div class="work-overlay">
+                            <span class="work-category">Events</span>
+                            <h3 class="work-title">After Dark</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="gallery-item reveal-up">
+                    <div class="work-image" style="background-image: url('images/height.JPG');">
+                        <div class="work-overlay">
+                            <span class="work-category">Street</span>
+                            <h3 class="work-title">Looking Up</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="gallery-item reveal-right">
+                    <div class="work-image" style="background-image: url('images/summer-grad.jpg');">
+                        <div class="work-overlay">
+                            <span class="work-category">Portraits</span>
+                            <h3 class="work-title">Onward</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Row 10: Duo — Events + Dancer silhouette -->
+            <div class="gallery-row gallery-duo">
+                <div class="gallery-item gallery-tall reveal-left">
+                    <div class="work-image" style="background-image: url('images/ally-pacers.jpg');">
+                        <div class="work-overlay">
+                            <span class="work-category">Events</span>
+                            <h3 class="work-title">Night Moves</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="gallery-item gallery-wide reveal-right">
+                    <div class="work-image" style="background-image: url('images/tiny-dancer.jpg');">
+                        <div class="work-overlay">
+                            <span class="work-category">Dance</span>
+                            <h3 class="work-title">Tiny Dancer</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Row 11: Full — Silhouette with cloth -->
+            <div class="gallery-row reveal-scale">
+                <div class="gallery-item gallery-full gallery-cinematic">
+                    <div class="work-image" style="background-image: url('images/channel-cloth.jpg');">
+                        <div class="work-overlay">
+                            <span class="work-category">Fine Art</span>
+                            <h3 class="work-title">Silhouette</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Row 12: Trio — Collage, Channel beach, Grad portrait -->
+            <div class="gallery-row gallery-trio">
+                <div class="gallery-item reveal-left">
+                    <div class="work-image" style="background-image: url('images/channel-collage.jpg');">
+                        <div class="work-overlay">
+                            <span class="work-category">Portraits</span>
+                            <h3 class="work-title">The Collection</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="gallery-item reveal-up">
+                    <div class="work-image" style="background-image: url('images/channel-beach.jpg');">
+                        <div class="work-overlay">
+                            <span class="work-category">Portraits</span>
+                            <h3 class="work-title">Sun Kissed</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="gallery-item reveal-right">
+                    <div class="work-image" style="background-image: url('images/portrait-grad.jpg');">
+                        <div class="work-overlay">
+                            <span class="work-category">Portraits</span>
+                            <h3 class="work-title">The Walk</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </section>
 
-        <!-- SECTION 3: Pull Quote -->
+        <!-- PULL QUOTE -->
         <section class="section section-quote">
             <div class="quote-container reveal-up">
                 <div class="quote-mark">&ldquo;</div>
-                <blockquote class="quote-text">
-                    Photography is the story I fail to put into words.
-                </blockquote>
+                <blockquote class="quote-text">Photography is the story I fail to put into words.</blockquote>
                 <cite class="quote-author">&mdash; Destin Sparks</cite>
             </div>
         </section>
 
-        <!-- SECTION 4: About Teaser -->
+        <!-- ABOUT CHERYL -->
         <section id="about" class="section section-about">
             <div class="about-layout">
-                <div class="about-image reveal-left">
-                    <div class="about-photo" style="background-image: url('images/portrait-closeup.jpg');"></div>
+                <div class="about-images reveal-left">
+                    <div class="about-photo-main" style="background-image: url('images/cheryl-beach-camera.jpg');"></div>
+                    <div class="about-photo-row">
+                        <div class="about-photo-small" style="background-image: url('images/she-shoots.jpg');"></div>
+                        <div class="about-photo-small" style="background-image: url('images/cheryl-shooting.jpg');"></div>
+                    </div>
                 </div>
                 <div class="about-text reveal-right">
                     <span class="label-text">About Cheryl</span>
@@ -156,14 +356,17 @@
                         With over a decade behind the lens, I've learned that the best photographs happen in the spaces between poses &mdash; the stolen glance, the unguarded laugh, the quiet exhale before "I do."
                     </p>
                     <p class="about-body">
-                        Based in Southern California, available worldwide.
+                        From beach proposals to Día de los Muertos, from street dancers to quiet sunsets &mdash; I'm drawn to the moments that pulse with life.
+                    </p>
+                    <p class="about-body">
+                        Based in San Diego, California. Available worldwide.
                     </p>
                     <a href="#contact" class="about-link">Let's create something beautiful &rarr;</a>
                 </div>
             </div>
         </section>
 
-        <!-- SECTION 5: Contact / CTA -->
+        <!-- CTA -->
         <section id="contact" class="section section-cta">
             <div class="cta-content reveal-scale">
                 <span class="cta-eyebrow">Ready?</span>
@@ -179,10 +382,11 @@
         <div class="footer-top">
             <div class="footer-brand">CHERYL NAUMAN</div>
             <div class="footer-links">
-                <a href="Events.html" class="footer-link">Events</a>
-                <a href="Portraits.html" class="footer-link">Portraits</a>
-                <a href="Food.html" class="footer-link">Food</a>
-                <a href="Lifestyle.html" class="footer-link">Lifestyle</a>
+                <a href="#work" class="footer-link">Portraits</a>
+                <a href="#work" class="footer-link">Couples</a>
+                <a href="#work" class="footer-link">Events</a>
+                <a href="#work" class="footer-link">Dance</a>
+                <a href="#work" class="footer-link">Landscape</a>
             </div>
         </div>
         <div class="footer-bottom">

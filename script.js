@@ -149,9 +149,9 @@ function updateScene() {
         overlay.style.opacity = 1;
     }
 
-    // Tagline reveal — fades in during middle of aperture opening
+    // Tagline reveal — fades in as aperture opens, hides when content scrolls over
     if (heroTagline) {
-        if (progress > 0.3 && progress < 0.95) {
+        if (progress > 0.15 && progress < 0.98) {
             heroTagline.classList.add('visible');
         } else {
             heroTagline.classList.remove('visible');
