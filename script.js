@@ -6,11 +6,9 @@ const container = document.querySelector('.container');
 const photos = document.querySelectorAll('.photo');
 
 const NUM_BLADES = 9;
-const OVERLAP_DEG = 12;        // angular overlap between adjacent blades
-const MAX_OPEN_ANGLE = 150;    // degrees each blade rotates when fully open
-const PIVOT_RADIUS_RATIO = 0.55; // pivot ring radius as fraction of maxRadius
+const OVERLAP_DEG = 12;
 
-let vw, vh, cx, cy, maxRadius, maxScroll, pivotRadius, bladeReach;
+let vw, vh, cx, cy, maxRadius, maxScroll, bladeReach;
 
 function recalcDimensions() {
     vw = window.innerWidth;
@@ -19,8 +17,7 @@ function recalcDimensions() {
     cy = vh / 2;
     maxRadius = Math.sqrt(cx * cx + cy * cy) + 100;
     maxScroll = vh;
-    pivotRadius = maxRadius * PIVOT_RADIUS_RATIO;
-    bladeReach = maxRadius * 1.4;
+    bladeReach = maxRadius * 1.5;
     svg.setAttribute('viewBox', `0 0 ${vw} ${vh}`);
 }
 
@@ -34,14 +31,15 @@ function ptAt(angleDeg, radius) {
 function buildIris(openAmount) {
     // openAmount: 0 = fully closed, 1 = fully open
     const segAngle = 360 / NUM_BLADES;
-    const rotation = openAmount * MAX_OPEN_ANGLE;
     let html = '';
+
+    // Each blade translates outward along its radial direction
+    // AND rotates slightly for that mechanical iris feel
+    const maxTranslate = maxRadius * 1.6;
+    const maxRotation = 25; // subtle rotation on top of the slide
 
     for (let i = 0; i < NUM_BLADES; i++) {
         const baseAngle = i * segAngle - 90;
-
-        // --- Blade shape ---
-        // Triangle sector from center outward with angular overlap
         const startAngle = baseAngle;
         const endAngle = baseAngle + segAngle + OVERLAP_DEG;
 
@@ -49,22 +47,25 @@ function buildIris(openAmount) {
         const p1 = ptAt(startAngle, bladeReach);
         const p2 = ptAt(endAngle, bladeReach);
 
-        // --- Pivot point on the outer ring ---
-        // Each blade pivots from a point on the ring at its sector midpoint
-        const pivotAngle = baseAngle + segAngle * 0.5;
-        const pivot = ptAt(pivotAngle, pivotRadius);
+        // Translation: slide outward along the blade's midline angle
+        const midAngleDeg = baseAngle + segAngle / 2;
+        const midAngleRad = toRad(midAngleDeg);
+        const tx = Math.cos(midAngleRad) * maxTranslate * openAmount;
+        const ty = Math.sin(midAngleRad) * maxTranslate * openAmount;
 
-        // Alternating shade for visible blade distinction
+        // Small rotation around the blade's outer midpoint for mechanical feel
+        const pivotDist = maxRadius * 0.5;
+        const pivot = ptAt(midAngleDeg, pivotDist);
+        const rot = openAmount * maxRotation;
+
         const gradId = i % 2 === 0 ? 'bladeGrad1' : 'bladeGrad2';
 
-        // Blade polygon (stroke matches fill to eliminate anti-aliasing seams)
         html += `<polygon
             points="${p0.x},${p0.y} ${p1.x},${p1.y} ${p2.x},${p2.y}"
             fill="url(#${gradId})" stroke="url(#${gradId})" stroke-width="1.5"
             stroke-linejoin="round"
-            transform="rotate(${rotation} ${pivot.x} ${pivot.y})"
+            transform="translate(${tx} ${ty}) rotate(${rot} ${pivot.x} ${pivot.y})"
         />`;
-
     }
 
     bladeGroup.innerHTML = html;
@@ -82,12 +83,10 @@ function updateScene() {
     // Build the iris blades
     buildIris(easedProgress);
 
-    // Fade out overlay — keep blades visible longer so you see the mechanics
-    // Only start fading at 80% open
-    if (progress >= 0.85) {
+    // Keep overlay fully visible — blades physically leave the viewport
+    // Only hide overlay after blades are completely gone (progress near 1)
+    if (progress >= 0.95) {
         overlay.style.opacity = 0;
-    } else if (progress > 0.6) {
-        overlay.style.opacity = 1 - ((progress - 0.6) / 0.25);
     } else {
         overlay.style.opacity = 1;
     }
