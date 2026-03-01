@@ -7,7 +7,7 @@ const photos = document.querySelectorAll('.photo');
 
 const NUM_BLADES = 9;
 const OVERLAP_DEG = 12;        // angular overlap between adjacent blades
-const MAX_OPEN_ANGLE = 38;     // degrees each blade rotates when fully open
+const MAX_OPEN_ANGLE = 60;     // degrees each blade rotates when fully open
 const PIVOT_RADIUS_RATIO = 0.5; // pivot ring radius as fraction of maxRadius
 
 let vw, vh, cx, cy, maxRadius, maxScroll, pivotRadius, bladeReach;
@@ -64,12 +64,6 @@ function buildIris(openAmount) {
             transform="rotate(${rotation} ${pivot.x} ${pivot.y})"
         />`;
 
-        // Leading edge line (the visible blade boundary)
-        html += `<line
-            x1="${p0.x}" y1="${p0.y}" x2="${p1.x}" y2="${p1.y}"
-            stroke="rgba(80,80,80,0.6)" stroke-width="1"
-            transform="rotate(${rotation} ${pivot.x} ${pivot.y})"
-        />`;
     }
 
     bladeGroup.innerHTML = html;
