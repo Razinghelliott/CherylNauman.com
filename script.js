@@ -65,13 +65,37 @@ function buildIris(openAmount) {
 
         const gradId = i % 2 === 0 ? 'bladeGrad1' : 'bladeGrad2';
 
+        const bladeTransform = `translate(${tx} ${ty}) rotate(${rotation} ${pivot.x} ${pivot.y})`;
+
         // Rotate first (iris feel), then translate outward (clear screen)
         html += `<polygon
             points="${p0.x},${p0.y} ${p1.x},${p1.y} ${p2.x},${p2.y}"
             fill="url(#${gradId})" stroke="url(#${gradId})" stroke-width="1.5"
             stroke-linejoin="round"
-            transform="translate(${tx} ${ty}) rotate(${rotation} ${pivot.x} ${pivot.y})"
+            transform="${bladeTransform}"
         />`;
+
+        // "Scroll to Open" text on blade index 4 (the bottom-right blade)
+        if (i === 4) {
+            const textDist = maxRadius * 0.32;
+            const textAngle = baseAngle + segAngle * 0.5;
+            const textPos = ptAt(textAngle, textDist);
+            const textRotDeg = textAngle + 90; // perpendicular to the radius
+
+            html += `<text
+                x="${textPos.x}" y="${textPos.y}"
+                transform="${bladeTransform}"
+                text-anchor="middle"
+                dominant-baseline="middle"
+                fill="rgba(255,255,255,0.25)"
+                font-family="Arial, sans-serif"
+                font-size="${Math.max(14, vw * 0.014)}px"
+                font-weight="300"
+                letter-spacing="4"
+                style="text-transform:uppercase"
+                transform-origin="${textPos.x} ${textPos.y}"
+            ><tspan transform="rotate(${textRotDeg} ${textPos.x} ${textPos.y})">SCROLL TO OPEN</tspan></text>`;
+        }
     }
 
     bladeGroup.innerHTML = html;
