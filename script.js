@@ -8,12 +8,11 @@ const maxScroll = window.innerHeight;
 
 const NUM_BLADES = 8;
 
-// Build an octagon (or n-gon) of a given radius centered at (50, 50)
+// Build an octagon of a given radius centered at (50, 50)
 function buildAperturePoints(radius) {
     const cx = 50, cy = 50;
     const points = [];
     for (let i = 0; i < NUM_BLADES; i++) {
-        // Offset by half a segment so flat edge is on top
         const angle = (Math.PI * 2 * i / NUM_BLADES) - Math.PI / 2;
         const x = cx + radius * Math.cos(angle);
         const y = cy + radius * Math.sin(angle);
@@ -29,13 +28,10 @@ function updateScene() {
     const progress = Math.min(scrollPosition / maxScroll, 1);
 
     // --- Aperture effect ---
-    // Hole grows from 0 radius to 80 (well beyond viewport edges)
-    // Use an eased progress for a more natural feel
-    const easedProgress = 1 - Math.pow(1 - progress, 2); // ease-out quad
+    const easedProgress = 1 - Math.pow(1 - progress, 2);
     const holeRadius = easedProgress * 80;
 
     if (holeRadius < 0.5) {
-        // Fully closed - just a point
         apertureHole.setAttribute('points', '50,50');
         bladeLines.setAttribute('points', '50,50');
     } else {
@@ -44,29 +40,24 @@ function updateScene() {
         bladeLines.setAttribute('points', pts);
     }
 
-    // Fade out the entire overlay in the last 30% of scroll
-    if (progress > 0.7) {
-        const fadeProgress = (progress - 0.7) / 0.3;
-        overlay.style.opacity = 1 - fadeProgress;
+    // Fade out overlay in last 30%
+    if (progress >= 0.98) {
+        overlay.style.opacity = 0;
+    } else if (progress > 0.7) {
+        overlay.style.opacity = 1 - ((progress - 0.7) / 0.3);
     } else {
         overlay.style.opacity = 1;
     }
 
-    // Hide completely when done
-    if (progress >= 0.98) {
-        overlay.style.opacity = 0;
-    }
+    // --- Background parallax (transform only, no position changes) ---
+    const bgParallax = Math.min(scrollPosition, maxScroll) * 0.3;
+    background.style.transform = `translateY(-${bgParallax}px) scale(1.1)`;
 
-    // --- Main background parallax ---
-    const bgTranslate = scrollPosition * 0.3;
-    if (scrollPosition <= maxScroll) {
-        background.style.transform = `translateY(-${bgTranslate}px) scale(1.1)`;
-        container.style.position = 'fixed';
-        container.style.top = '0';
+    // After aperture zone, slide the whole container up so it scrolls away
+    if (scrollPosition > maxScroll) {
+        container.style.transform = `translateY(-${scrollPosition - maxScroll}px)`;
     } else {
-        container.style.position = 'absolute';
-        container.style.top = `${maxScroll}px`;
-        background.style.transform = `translateY(-${maxScroll * 0.3}px) scale(1.1)`;
+        container.style.transform = 'translateY(0)';
     }
 
     // --- Parallax for gallery photos ---
@@ -90,5 +81,5 @@ window.addEventListener('scroll', () => {
     }
 }, { passive: true });
 
-// Run once on load to set initial state
+// Set initial state on load
 updateScene();
