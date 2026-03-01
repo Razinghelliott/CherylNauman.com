@@ -7,8 +7,8 @@ const photos = document.querySelectorAll('.photo');
 
 const NUM_BLADES = 9;
 const OVERLAP_DEG = 12;        // angular overlap between adjacent blades
-const MAX_OPEN_ANGLE = 60;     // degrees each blade rotates when fully open
-const PIVOT_RADIUS_RATIO = 0.5; // pivot ring radius as fraction of maxRadius
+const MAX_OPEN_ANGLE = 150;    // degrees each blade rotates when fully open
+const PIVOT_RADIUS_RATIO = 0.55; // pivot ring radius as fraction of maxRadius
 
 let vw, vh, cx, cy, maxRadius, maxScroll, pivotRadius, bladeReach;
 
@@ -57,10 +57,11 @@ function buildIris(openAmount) {
         // Alternating shade for visible blade distinction
         const gradId = i % 2 === 0 ? 'bladeGrad1' : 'bladeGrad2';
 
-        // Blade polygon
+        // Blade polygon (stroke matches fill to eliminate anti-aliasing seams)
         html += `<polygon
             points="${p0.x},${p0.y} ${p1.x},${p1.y} ${p2.x},${p2.y}"
-            fill="url(#${gradId})"
+            fill="url(#${gradId})" stroke="url(#${gradId})" stroke-width="1.5"
+            stroke-linejoin="round"
             transform="rotate(${rotation} ${pivot.x} ${pivot.y})"
         />`;
 
@@ -83,10 +84,10 @@ function updateScene() {
 
     // Fade out overlay — keep blades visible longer so you see the mechanics
     // Only start fading at 80% open
-    if (progress >= 0.98) {
+    if (progress >= 0.85) {
         overlay.style.opacity = 0;
-    } else if (progress > 0.8) {
-        overlay.style.opacity = 1 - ((progress - 0.8) / 0.2);
+    } else if (progress > 0.6) {
+        overlay.style.opacity = 1 - ((progress - 0.6) / 0.25);
     } else {
         overlay.style.opacity = 1;
     }
