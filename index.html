@@ -24,6 +24,19 @@
                         <stop offset="0%" style="stop-color:#222" />
                         <stop offset="100%" style="stop-color:#0d0d0d" />
                     </linearGradient>
+                    <filter id="emboss" x="-10%" y="-10%" width="120%" height="120%">
+                        <feOffset in="SourceAlpha" dx="1" dy="1" result="light" />
+                        <feFlood flood-color="rgba(255,255,255,0.3)" result="lightColor" />
+                        <feComposite in="lightColor" in2="light" operator="in" result="highlight" />
+                        <feOffset in="SourceAlpha" dx="-1" dy="-1" result="shadow" />
+                        <feFlood flood-color="rgba(0,0,0,0.6)" result="shadowColor" />
+                        <feComposite in="shadowColor" in2="shadow" operator="in" result="darkShadow" />
+                        <feMerge>
+                            <feMergeNode in="darkShadow" />
+                            <feMergeNode in="highlight" />
+                            <feMergeNode in="SourceGraphic" />
+                        </feMerge>
+                    </filter>
                 </defs>
                 <g id="bladeGroup"></g>
             </svg>

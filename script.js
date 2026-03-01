@@ -75,29 +75,37 @@ function buildIris(openAmount) {
             transform="${bladeTransform}"
         />`;
 
-        // "Scroll to Open" engraved exactly along the leading edge of blade 3
+        // "Scroll to Open" embossed just below the leading edge of blade 3
         if (i === 3) {
-            // Two points on the blade's leading edge (startAngle line from center outward)
-            const edgePt1 = ptAt(startAngle, maxRadius * 0.12); // near center
-            const edgePt2 = ptAt(startAngle, maxRadius * 0.42); // partway out
-            // Midpoint for text anchor
-            const tmx = (edgePt1.x + edgePt2.x) / 2;
-            const tmy = (edgePt1.y + edgePt2.y) / 2;
-            // Exact angle of this edge line (atan2 gives the true pixel angle)
+            // Two points on the blade's leading edge
+            const edgePt1 = ptAt(startAngle, maxRadius * 0.12);
+            const edgePt2 = ptAt(startAngle, maxRadius * 0.42);
+            // Midpoint along the edge
+            const emx = (edgePt1.x + edgePt2.x) / 2;
+            const emy = (edgePt1.y + edgePt2.y) / 2;
+            // Edge direction and perpendicular (to offset below the line)
             const dx = edgePt2.x - edgePt1.x;
             const dy = edgePt2.y - edgePt1.y;
+            const len = Math.sqrt(dx * dx + dy * dy);
             const lineAngleDeg = Math.atan2(dy, dx) * 180 / Math.PI;
+            // Perpendicular offset (positive = right side of direction = below for this blade)
+            const offsetPx = Math.max(12, vw * 0.018);
+            const perpX = (-dy / len) * offsetPx;
+            const perpY = (dx / len) * offsetPx;
+            const tmx = emx + perpX;
+            const tmy = emy + perpY;
 
             html += `<text
                 x="${tmx}" y="${tmy}"
                 transform="${bladeTransform} rotate(${lineAngleDeg} ${tmx} ${tmy})"
                 text-anchor="middle"
                 dominant-baseline="middle"
-                fill="rgba(255,255,255,0.5)"
+                fill="rgba(180,180,180,0.4)"
                 font-family="'Georgia', 'Times New Roman', serif"
-                font-size="${Math.max(14, vw * 0.015)}px"
+                font-size="${Math.max(13, vw * 0.013)}px"
                 font-weight="400"
                 letter-spacing="5"
+                filter="url(#emboss)"
             >SCROLL TO OPEN</text>`;
         }
     }
