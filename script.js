@@ -7,8 +7,10 @@ const photos = document.querySelectorAll('.photo');
 
 const NUM_BLADES = 9;
 const OVERLAP_DEG = 12;
+const MAX_ROTATION = 55;         // primary iris rotation (degrees)
+const PIVOT_RADIUS_RATIO = 0.52; // pivot ring position
 
-let vw, vh, cx, cy, maxRadius, maxScroll, bladeReach;
+let vw, vh, cx, cy, maxRadius, maxScroll, pivotRadius, bladeReach;
 
 function recalcDimensions() {
     vw = window.innerWidth;
@@ -17,6 +19,7 @@ function recalcDimensions() {
     cy = vh / 2;
     maxRadius = Math.sqrt(cx * cx + cy * cy) + 100;
     maxScroll = vh;
+    pivotRadius = maxRadius * PIVOT_RADIUS_RATIO;
     bladeReach = maxRadius * 1.5;
     svg.setAttribute('viewBox', `0 0 ${vw} ${vh}`);
 }
@@ -33,38 +36,41 @@ function buildIris(openAmount) {
     const segAngle = 360 / NUM_BLADES;
     let html = '';
 
-    // Each blade translates outward along its radial direction
-    // AND rotates slightly for that mechanical iris feel
-    const maxTranslate = maxRadius * 1.6;
-    const maxRotation = 25; // subtle rotation on top of the slide
+    // Phase 1 (0-0.6): mostly rotation — gives the iris mechanical look
+    // Phase 2 (0.6-1): rotation continues + radial translation to clear viewport
+    const rotAmount = Math.min(openAmount / 0.6, 1);           // 0→1 over first 60%
+    const slideAmount = Math.max((openAmount - 0.4) / 0.6, 0); // 0→1 from 40% onward
+
+    const rotation = rotAmount * MAX_ROTATION;
+    const maxSlide = maxRadius * 1.2;
 
     for (let i = 0; i < NUM_BLADES; i++) {
         const baseAngle = i * segAngle - 90;
         const startAngle = baseAngle;
         const endAngle = baseAngle + segAngle + OVERLAP_DEG;
 
+        // Blade triangle
         const p0 = { x: cx, y: cy };
         const p1 = ptAt(startAngle, bladeReach);
         const p2 = ptAt(endAngle, bladeReach);
 
-        // Translation: slide outward along the blade's midline angle
-        const midAngleDeg = baseAngle + segAngle / 2;
-        const midAngleRad = toRad(midAngleDeg);
-        const tx = Math.cos(midAngleRad) * maxTranslate * openAmount;
-        const ty = Math.sin(midAngleRad) * maxTranslate * openAmount;
+        // Pivot on the outer ring (iris rotation)
+        const pivotAngle = baseAngle + segAngle * 0.5;
+        const pivot = ptAt(pivotAngle, pivotRadius);
 
-        // Small rotation around the blade's outer midpoint for mechanical feel
-        const pivotDist = maxRadius * 0.5;
-        const pivot = ptAt(midAngleDeg, pivotDist);
-        const rot = openAmount * maxRotation;
+        // Radial slide outward along blade midline (to clear viewport)
+        const midRad = toRad(pivotAngle);
+        const tx = Math.cos(midRad) * maxSlide * slideAmount;
+        const ty = Math.sin(midRad) * maxSlide * slideAmount;
 
         const gradId = i % 2 === 0 ? 'bladeGrad1' : 'bladeGrad2';
 
+        // Rotate first (iris feel), then translate outward (clear screen)
         html += `<polygon
             points="${p0.x},${p0.y} ${p1.x},${p1.y} ${p2.x},${p2.y}"
             fill="url(#${gradId})" stroke="url(#${gradId})" stroke-width="1.5"
             stroke-linejoin="round"
-            transform="translate(${tx} ${ty}) rotate(${rot} ${pivot.x} ${pivot.y})"
+            transform="translate(${tx} ${ty}) rotate(${rotation} ${pivot.x} ${pivot.y})"
         />`;
     }
 
@@ -77,21 +83,19 @@ function updateScene() {
     const scrollPosition = window.scrollY;
     const progress = Math.min(scrollPosition / maxScroll, 1);
 
-    // Ease-out for natural mechanical feel
+    // Ease-out curve for mechanical feel
     const easedProgress = 1 - Math.pow(1 - progress, 2.5);
 
-    // Build the iris blades
     buildIris(easedProgress);
 
-    // Keep overlay fully visible — blades physically leave the viewport
-    // Only hide overlay after blades are completely gone (progress near 1)
+    // Keep overlay visible — blades physically leave the viewport
     if (progress >= 0.95) {
         overlay.style.opacity = 0;
     } else {
         overlay.style.opacity = 1;
     }
 
-    // Background parallax (transforms only, no layout changes)
+    // Background parallax
     const bgParallax = Math.min(scrollPosition, maxScroll) * 0.3;
     background.style.transform = `translateY(-${bgParallax}px) scale(1.1)`;
 
