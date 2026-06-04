@@ -99,13 +99,14 @@ function buildIris(openAmount) {
             const tmy = emy + perpY;
 
             html += `<text
+                class="scroll-to-open-text"
                 x="${tmx}" y="${tmy}"
                 transform="${bladeTransform} rotate(${lineAngleDeg} ${tmx} ${tmy})"
                 text-anchor="middle"
                 dominant-baseline="middle"
-                fill="rgba(180,180,180,0.4)"
+                fill="rgba(220,200,160,0.9)"
                 font-family="'Georgia', 'Times New Roman', serif"
-                font-size="${Math.max(13, vw * 0.013)}px"
+                font-size="${Math.max(14, vw * 0.014)}px"
                 font-weight="400"
                 letter-spacing="5"
                 filter="url(#emboss)"

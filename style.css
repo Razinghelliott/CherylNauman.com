@@ -145,6 +145,15 @@ body {
     will-change: opacity;
 }
 
+@keyframes scroll-glow {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 1; }
+}
+
+.scroll-to-open-text {
+    animation: scroll-glow 2.5s ease-in-out infinite;
+}
+
 .aperture-overlay svg {
     display: block;
     width: 100%;
