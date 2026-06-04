@@ -215,7 +215,7 @@
                     </div>
                 </div>
                 <div class="gallery-item gallery-wide reveal-right">
-                    <div class="work-image" style="background-image: url('images/tiny-dancer.jpg'); background-size: contain; background-repeat: no-repeat; background-position: center;">
+                    <div class="work-image" style="background-image: url('images/tiny-dancer.jpg');">
                         <div class="work-overlay">
                             <span class="work-category">Dance</span>
                             <h3 class="work-title">Tiny Dancer</h3>
@@ -435,19 +435,7 @@
                     </div>
                 </div>
                 <div class="gallery-item reveal-right">
-                    <div class="work-image" style="background-image: url('images/engagement-yacht-sunset-couple.jpg');">
-                        <div class="work-overlay">
-                            <span class="work-category">Couples</span>
-                            <h3 class="work-title">Marina Glow</h3>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Wedding yacht lift — contain to show full bodies -->
-            <div class="gallery-row reveal-scale">
-                <div class="gallery-item gallery-full">
-                    <div class="work-image" style="background-image: url('images/wedding-yacht-lift.jpg'); background-size: contain; background-repeat: no-repeat; background-position: center;">
+                    <div class="work-image" style="background-image: url('images/wedding-yacht-lift.jpg');">
                         <div class="work-overlay">
                             <span class="work-category">Weddings</span>
                             <h3 class="work-title">Swept Away</h3>
@@ -456,13 +444,25 @@
                 </div>
             </div>
 
-            <!-- Row 21: Full — White party, Coronado Bridge sunset -->
+            <!-- Wedding yacht lift — contain to show full bodies -->
             <div class="gallery-row reveal-scale">
                 <div class="gallery-item gallery-full">
                     <div class="work-image" style="background-image: url('images/white-party-bridge.jpg');">
                         <div class="work-overlay">
                             <span class="work-category">Events</span>
                             <h3 class="work-title">Bridge at Sunset</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Row 21: Full — White party, Coronado Bridge sunset -->
+            <div class="gallery-row reveal-scale">
+                <div class="gallery-item gallery-full">
+                    <div class="work-image" style="background-image: url('images/white-party-family.jpg');">
+                        <div class="work-overlay">
+                            <span class="work-category">Events</span>
+                            <h3 class="work-title">Family Ties</h3>
                         </div>
                     </div>
                 </div>
@@ -507,10 +507,10 @@
                     </div>
                 </div>
                 <div class="gallery-item gallery-tall reveal-right">
-                    <div class="work-image" style="background-image: url('images/white-party-family.jpg');">
+                    <div class="work-image" style="background-image: url('images/engagement-yacht-sunset-couple.jpg');">
                         <div class="work-overlay">
-                            <span class="work-category">Events</span>
-                            <h3 class="work-title">Family Ties</h3>
+                            <span class="work-category">Couples</span>
+                            <h3 class="work-title">Marina Glow</h3>
                         </div>
                     </div>
                 </div>
@@ -563,16 +563,34 @@
             </div>
         </section>
 
-        <!-- CTA -->
-        <section id="contact" class="section section-cta">
-            <div class="cta-content reveal-scale">
+    </main>
+
+    <!-- ═══════ CLOSING APERTURE ═══════ -->
+    <div class="container-closing" id="closingContainer">
+        <div class="closing-sticky">
+            <div class="closing-background" style="background-image: url('images/white-party-bridge.jpg');"></div>
+            <div class="closing-aperture-overlay">
+                <svg id="closingApertureSvg" preserveAspectRatio="none" width="100%" height="100%" overflow="hidden">
+                    <defs>
+                        <linearGradient id="closingBladeGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#1a1a1a" />
+                            <stop offset="100%" style="stop-color:#0a0a0a" />
+                        </linearGradient>
+                        <linearGradient id="closingBladeGrad2" x1="100%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" style="stop-color:#222" />
+                            <stop offset="100%" style="stop-color:#0d0d0d" />
+                        </linearGradient>
+                    </defs>
+                    <g id="closingBladeGroup"></g>
+                </svg>
+            </div>
+            <div class="closing-cta" id="closingCta">
                 <span class="cta-eyebrow">Ready to Set Sail?</span>
                 <h2 class="cta-heading">Let's Capture<br>Something Unforgettable</h2>
-                <a href="mailto:cheryl@cherylnauman.com" class="cta-button">Book a Charter Shoot</a>
+                <a href="mailto:cheryl@cherylnauman.com" class="cta-button" id="contact">Book a Charter Shoot</a>
             </div>
-        </section>
-
-    </main>
+        </div>
+    </div>
 
     <!-- ═══════ FOOTER ═══════ -->
     <footer class="footer">

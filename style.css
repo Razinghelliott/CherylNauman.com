@@ -331,8 +331,9 @@ body {
 .work-image {
     width: 100%;
     height: 100%;
-    background-size: cover;
+    background-size: contain;
     background-position: center;
+    background-repeat: no-repeat;
     position: relative;
     transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     cursor: pointer;
@@ -571,14 +572,68 @@ body {
 }
 
 
+/* ═══════ CLOSING APERTURE ═══════ */
+
+.container-closing {
+    position: relative;
+    height: 200vh;
+    z-index: 5;
+}
+
+.closing-sticky {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.closing-background {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.closing-aperture-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.closing-cta {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    text-align: center;
+    opacity: 0;
+    transition: opacity 0.8s ease;
+    pointer-events: none;
+}
+
+.closing-cta.visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+
 /* ═══════ FOOTER ═══════ */
 
 .footer {
     position: relative;
     z-index: 10;
-    background: var(--black);
-    padding: 60px 40px 40px;
+    background: rgba(0,0,0,0.85);
+    padding: 24px 40px 20px;
     border-top: 1px solid rgba(255,255,255,0.06);
+    margin-top: -80px;
 }
 
 .footer-top {
@@ -586,7 +641,7 @@ body {
     justify-content: space-between;
     align-items: center;
     max-width: 1200px;
-    margin: 0 auto 40px;
+    margin: 0 auto 16px;
 }
 
 .footer-brand {
@@ -619,7 +674,7 @@ body {
 
 .footer-bottom {
     text-align: center;
-    padding-top: 30px;
+    padding-top: 12px;
     border-top: 1px solid rgba(255,255,255,0.06);
     max-width: 1200px;
     margin: 0 auto;

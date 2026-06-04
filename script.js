@@ -11,6 +11,13 @@ const background = document.querySelector('.background');
 const container = document.querySelector('.container');
 const heroTagline = document.querySelector('.hero-tagline');
 
+// ── Closing Aperture Elements ──
+const closingSvg = document.getElementById('closingApertureSvg');
+const closingBladeGroup = document.getElementById('closingBladeGroup');
+const closingOverlay = document.querySelector('.closing-aperture-overlay');
+const closingContainer = document.getElementById('closingContainer');
+const closingCta = document.getElementById('closingCta');
+
 // ── Aperture Config ──
 const NUM_BLADES = 9;
 const OVERLAP_DEG = 12;
@@ -29,6 +36,7 @@ function recalcDimensions() {
     pivotRadius = maxRadius * PIVOT_RADIUS_RATIO;
     bladeReach = maxRadius * 1.5;
     svg.setAttribute('viewBox', `0 0 ${vw} ${vh}`);
+    if (closingSvg) closingSvg.setAttribute('viewBox', `0 0 ${vw} ${vh}`);
 }
 
 function toRad(deg) { return deg * Math.PI / 180; }
@@ -109,6 +117,48 @@ function buildIris(openAmount) {
 }
 
 
+// ── Build Closing Iris (reverse — 0 = open, 1 = closed) ──
+function buildClosingIris(closeAmount) {
+    if (!closingBladeGroup) return;
+    const openAmount = 1 - closeAmount;
+    const segAngle = 360 / NUM_BLADES;
+    let html = '';
+
+    const rotAmount = Math.min(openAmount / 0.6, 1);
+    const slideAmount = Math.max((openAmount - 0.4) / 0.6, 0);
+    const rotation = rotAmount * MAX_ROTATION;
+    const maxSlide = maxRadius * 1.2;
+
+    for (let i = 0; i < NUM_BLADES; i++) {
+        const baseAngle = i * segAngle - 90;
+        const startAngle = baseAngle;
+        const endAngle = baseAngle + segAngle + OVERLAP_DEG;
+
+        const p0 = { x: cx, y: cy };
+        const p1 = ptAt(startAngle, bladeReach);
+        const p2 = ptAt(endAngle, bladeReach);
+
+        const pivotAngle = baseAngle + segAngle * 0.5;
+        const pivot = ptAt(pivotAngle, pivotRadius);
+        const midRad = toRad(pivotAngle);
+        const tx = Math.cos(midRad) * maxSlide * slideAmount;
+        const ty = Math.sin(midRad) * maxSlide * slideAmount;
+
+        const gradId = i % 2 === 0 ? 'closingBladeGrad1' : 'closingBladeGrad2';
+        const bladeTransform = `translate(${tx} ${ty}) rotate(${rotation} ${pivot.x} ${pivot.y})`;
+
+        html += `<polygon
+            points="${p0.x},${p0.y} ${p1.x},${p1.y} ${p2.x},${p2.y}"
+            fill="url(#${gradId})" stroke="url(#${gradId})" stroke-width="1.5"
+            stroke-linejoin="round"
+            transform="${bladeTransform}"
+        />`;
+    }
+
+    closingBladeGroup.innerHTML = html;
+}
+
+
 // ── Scroll Reveal System ──
 const revealElements = [];
 
@@ -165,6 +215,29 @@ function updateScene() {
     const bgScale = 1.1 + (Math.min(progress, 1) * 0.05);
     background.style.transform = `translateY(-${bgParallax}px) scale(${bgScale})`;
 
+    // ── Closing Aperture ──
+    if (closingContainer) {
+        const closingRect = closingContainer.getBoundingClientRect();
+        const closingScrollRange = closingContainer.offsetHeight - vh;
+        const closingScrolled = -closingRect.top;
+        const closeProgress = Math.max(0, Math.min(closingScrolled / closingScrollRange, 1));
+        const easedClose = Math.pow(closeProgress, 2.5);
+
+        buildClosingIris(easedClose);
+
+        if (closingOverlay) {
+            closingOverlay.style.opacity = closeProgress < 0.05 ? 0 : 1;
+        }
+
+        if (closingCta) {
+            if (easedClose > 0.85) {
+                closingCta.classList.add('visible');
+            } else {
+                closingCta.classList.remove('visible');
+            }
+        }
+    }
+
     // Check scroll reveals
     checkReveals();
 
@@ -186,4 +259,5 @@ window.addEventListener('scroll', () => {
 // ── Init ──
 recalcDimensions();
 initReveals();
+buildClosingIris(0);
 updateScene();
