@@ -844,11 +844,18 @@ body {
     }
 
     .about-images {
+        width: 100%;
         max-width: 100%;
     }
 
     .about-photo-main {
+        width: 100%;
         aspect-ratio: 16 / 10;
+    }
+
+    .about-photo-small {
+        width: 100%;
+        min-height: 150px;
     }
 
     .footer-top {
