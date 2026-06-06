@@ -297,6 +297,10 @@ body {
     aspect-ratio: 2.76 / 1;
 }
 
+.gallery-closing .work-image {
+    background-size: cover;
+}
+
 /* Duo layout — golden ratio */
 .gallery-duo {
     display: flex;
