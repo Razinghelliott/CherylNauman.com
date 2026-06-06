@@ -225,9 +225,9 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 70vh;
-    padding: 80px 40px;
-    background: var(--near-black);
+    min-height: auto;
+    padding: 40px 40px 20px;
+    background: var(--dark);
 }
 
 .statement-text {
@@ -398,7 +398,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 60vh;
+    min-height: auto;
     padding: 120px 40px;
     background: var(--dark);
 }
