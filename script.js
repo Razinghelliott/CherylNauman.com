@@ -257,6 +257,32 @@ window.addEventListener('scroll', () => {
     }
 }, { passive: true });
 
+// ── Lightbox ──
+const lightbox = document.getElementById('lightbox');
+const lightboxImage = document.getElementById('lightboxImage');
+const lightboxClose = document.getElementById('lightboxClose');
+
+document.querySelectorAll('.work-image').forEach(img => {
+    img.addEventListener('click', (e) => {
+        const bg = img.style.backgroundImage;
+        const url = bg.replace(/url\(['"]?/, '').replace(/['"]?\)/, '');
+        lightboxImage.style.backgroundImage = `url('${url}')`;
+        lightbox.classList.add('active');
+        document.body.style.overflow = 'hidden';
+        e.stopPropagation();
+    });
+});
+
+function closeLightbox() {
+    lightbox.classList.remove('active');
+    document.body.style.overflow = '';
+}
+
+lightbox.addEventListener('click', closeLightbox);
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeLightbox();
+});
+
 // ── Init ──
 recalcDimensions();
 initReveals();
