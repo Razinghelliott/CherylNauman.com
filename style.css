@@ -829,6 +829,15 @@ body {
         aspect-ratio: 16 / 9;
     }
 
+    .gallery-closing {
+        aspect-ratio: auto;
+        min-height: 60vw;
+    }
+
+    .gallery-closing .work-image {
+        background-size: cover;
+    }
+
     .about-layout {
         flex-direction: column;
         gap: 40px;
